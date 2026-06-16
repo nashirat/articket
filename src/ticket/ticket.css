@@ -1,0 +1,221 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #d0d0d0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+  padding: 2rem;
+  gap: 1.5rem;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.controls button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.controls a {
+  text-decoration: none;
+}
+
+.ticket-wrapper {
+  background: white;
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.22);
+}
+
+.ticket {
+  width: 89mm;
+  height: 216mm;
+  position: relative;
+  background: white;
+  overflow: hidden;
+}
+
+.aruco {
+  position: absolute;
+  display: block;
+}
+
+.aruco img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+/* 14mm markers, 2mm inset */
+.m-tl {
+  top: 2mm;
+  left: 2mm;
+  width: 14mm;
+  height: 14mm;
+}
+.m-tr {
+  top: 2mm;
+  right: 2mm;
+  width: 14mm;
+  height: 14mm;
+}
+.m-bl {
+  bottom: 2mm;
+  left: 2mm;
+  width: 14mm;
+  height: 14mm;
+}
+.m-br {
+  bottom: 2mm;
+  right: 2mm;
+  width: 14mm;
+  height: 14mm;
+}
+.m-tc {
+  top: 2mm;
+  left: 50%;
+  width: 14mm;
+  height: 14mm;
+  transform: translateX(-50%);
+}
+.m-bc {
+  bottom: 2mm;
+  left: 50%;
+  width: 14mm;
+  height: 14mm;
+  transform: translateX(-50%);
+}
+.m-l1 {
+  top: 33%;
+  left: 2mm;
+  width: 14mm;
+  height: 14mm;
+  transform: translateY(-50%);
+}
+.m-r1 {
+  top: 33%;
+  right: 2mm;
+  width: 14mm;
+  height: 14mm;
+  transform: translateY(-50%);
+}
+.m-l2 {
+  top: 67%;
+  left: 2mm;
+  width: 14mm;
+  height: 14mm;
+  transform: translateY(-50%);
+}
+.m-r2 {
+  top: 67%;
+  right: 2mm;
+  width: 14mm;
+  height: 14mm;
+  transform: translateY(-50%);
+}
+
+.ticket-content {
+  position: absolute;
+  top: 20mm;
+  left: 20mm;
+  right: 20mm;
+  bottom: 22mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticket-brand {
+  font-size: 9pt;
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #111;
+  margin-bottom: 3mm;
+}
+
+.ticket-divider {
+  width: 100%;
+  height: 0.3mm;
+  background: #111;
+  margin-bottom: 4mm;
+}
+
+.ticket-title {
+  font-size: 13pt;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 1.5mm;
+}
+
+.ticket-meta {
+  font-size: 7pt;
+  color: #666;
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin-bottom: 7mm;
+}
+
+.ticket-qr {
+  width: 42mm;
+  height: 42mm;
+  margin-bottom: 7mm;
+}
+
+.ticket-qr img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ticket-tear {
+  width: 100%;
+  border-top: 0.4mm dashed #aaa;
+  margin-top: auto;
+  margin-bottom: 4mm;
+}
+
+.ticket-seat {
+  font-size: 7.5pt;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #333;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    background: white;
+    padding: 0;
+    min-height: unset;
+  }
+  .controls {
+    display: none;
+  }
+  .ticket-wrapper {
+    box-shadow: none;
+  }
+  @page {
+    size: 89mm 216mm;
+    margin: 0;
+  }
+}

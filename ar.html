@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Articket · AR Viewer</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@ar-js-org/ar.js@3.4.5/aframe/build/aframe-ar.js"></script>
+    <script type="module" src="/src/ar/index.ts"></script>
+  </head>
+  <body>
+    <a-scene
+      id="ar-scene"
+      arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: ARUCO_4X4_1000; debugUIEnabled: false;"
+      renderer="logarithmicDepthBuffer: true; antialias: true;"
+      vr-mode-ui="enabled: false"
+      embedded
+    >
+      <!-- Corners: cyan -->
+      <a-marker type="barcode" value="0" smooth="true" smoothCount="5">
+        <a-plane
+          color="#00ffcc"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+      <a-marker type="barcode" value="1" smooth="true" smoothCount="5">
+        <a-plane
+          color="#00ffcc"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+      <a-marker type="barcode" value="2" smooth="true" smoothCount="5">
+        <a-plane
+          color="#00ffcc"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+      <a-marker type="barcode" value="3" smooth="true" smoothCount="5">
+        <a-plane
+          color="#00ffcc"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+
+      <!-- Top/Bottom centers: yellow -->
+      <a-marker type="barcode" value="4" smooth="true" smoothCount="5">
+        <a-plane
+          color="#ffdd00"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+      <a-marker type="barcode" value="5" smooth="true" smoothCount="5">
+        <a-plane
+          color="#ffdd00"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+
+      <!-- Side mids: orange -->
+      <a-marker type="barcode" value="6" smooth="true" smoothCount="5">
+        <a-plane
+          color="#ff6600"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+      <a-marker type="barcode" value="7" smooth="true" smoothCount="5">
+        <a-plane
+          color="#ff6600"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+      <a-marker type="barcode" value="8" smooth="true" smoothCount="5">
+        <a-plane
+          color="#ff6600"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+      <a-marker type="barcode" value="9" smooth="true" smoothCount="5">
+        <a-plane
+          color="#ff6600"
+          opacity="0.7"
+          rotation="-90 0 0"
+          width="0.9"
+          height="0.9"
+        ></a-plane>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
