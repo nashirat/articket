@@ -30,17 +30,28 @@
         window.addEventListener("unhandledrejection", function (e) {
           log("reject: " + (e.reason && (e.reason.name + ": " + e.reason.message)), "err");
         });
+        // Mirror console.error/warn into the box — WASM aborts print here, not as
+        // window 'error' events.
+        ["error", "warn"].forEach(function (k) {
+          var o = console[k].bind(console);
+          console[k] = function () {
+            log(k + ": " + Array.prototype.join.call(arguments, " "), "err");
+            return o.apply(null, arguments);
+          };
+        });
 
         var cam = new URLSearchParams(location.search).get("cam");
         log("cam param: " + (cam || "(none)"));
         var orig = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
         navigator.mediaDevices.getUserMedia = function (c) {
-          if (cam) {
-            // Replace AR.js's video constraints entirely. Merging deviceId on top
-            // of AR.js's facingMode/width can make mobile browsers drop the track
-            // (stream blinks then dies). Pin only the chosen device.
-            c = c || {};
-            c.video = { deviceId: { exact: cam } };
+          if (cam && c && c.video) {
+            // Merge the chosen device into AR.js's own constraints — keep its
+            // resolution caps. Replacing them lets the stream come at native res
+            // (e.g. 4K), which makes ARToolkit crash on mobile.
+            c.video =
+              typeof c.video === "object"
+                ? Object.assign({}, c.video, { deviceId: { exact: cam } })
+                : { deviceId: { exact: cam } };
           }
           log("getUserMedia req: " + JSON.stringify(c));
           return orig(c).then(
