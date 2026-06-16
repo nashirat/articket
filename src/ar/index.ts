@@ -189,6 +189,14 @@ function updateHUD(): void {
 
 const scene = document.querySelector("#ar-scene");
 if (scene) {
+  // AR.js sizes the webcam video on init, often before the layout has settled,
+  // leaving the feed scaled too large (looks zoomed in). AR.js recomputes the
+  // size on a window resize, so nudge it once layout is stable.
+  const fixZoom = () => window.dispatchEvent(new Event("resize"));
+  scene.addEventListener("arjs-video-loaded", fixZoom);
+  scene.addEventListener("loaded", () => {
+    [200, 600, 1200].forEach((t) => setTimeout(fixZoom, t));
+  });
   scene.addEventListener("loaded", () => {
     for (let i = 0; i < MARKER_COUNT; i++) {
       const marker = document.querySelector(`a-marker[value="${i}"]`);
