@@ -12,15 +12,20 @@ body {
   background: #000;
 }
 
-/* AR.js injects the webcam <video>; make it cover the viewport responsively
-   instead of relying only on the inline px size it computes. */
+/* AR.js injects the webcam <video> and centers a cover-cropped feed using
+   negative margins/inline px sizing. Override that with object-fit:cover so the
+   feed fills the viewport responsively. Margins/transform MUST be reset —
+   otherwise AR.js's leftover negative margins shove the video off-screen. */
 #arjs-video,
-.a-canvas,
 video.arjs-video {
   position: fixed !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  margin: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  transform: none !important;
   object-fit: cover !important;
 }
 
