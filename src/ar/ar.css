@@ -26,10 +26,10 @@ body {
   letter-spacing: 0.04em;
 }
 
-#back-btn {
+#back-btn,
+#cam-btn {
   position: fixed;
   top: 1rem;
-  left: 1rem;
   z-index: 999;
   background: rgba(0, 0, 0, 0.65);
   color: white;
@@ -39,4 +39,66 @@ body {
   font-size: 0.82rem;
   cursor: pointer;
   font-family: system-ui, sans-serif;
+}
+
+#back-btn {
+  left: 1rem;
+}
+
+#cam-btn {
+  right: 1rem;
+}
+
+#cam-picker {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  gap: 1.2rem;
+  font-family: system-ui, sans-serif;
+  color: white;
+}
+
+#cam-picker h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+#cam-picker select {
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: none;
+  min-width: 280px;
+  background: #222;
+  color: white;
+}
+
+#cam-picker .picker-btns {
+  display: flex;
+  gap: 0.8rem;
+}
+
+#cam-picker button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#cam-picker .btn-confirm {
+  background: #00ffcc;
+  color: #000;
+}
+
+#cam-picker .btn-cancel {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
 }
