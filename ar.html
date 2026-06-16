@@ -27,6 +27,28 @@
     <script type="module" src="/src/ar/index.ts"></script>
   </head>
   <body>
+    <!--
+      Blocker renders before A-Frame canvas — TS module either populates it with
+      the picker (no ?cam) or removes it immediately (?cam present).
+    -->
+    <div
+      id="cam-blocker"
+      style="
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: #0d0d0d;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, sans-serif;
+        color: white;
+        gap: 1.2rem;
+      "
+    >
+      <p style="opacity: 0.5; font-size: 0.85rem">Initializing cameras…</p>
+    </div>
     <a-scene
       id="ar-scene"
       arjs="sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: ARUCO_4X4_1000; debugUIEnabled: false;"

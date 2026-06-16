@@ -97,11 +97,16 @@ drawBorder();
 
 // --- Camera picker ---
 
+// Populate the blocker div that's already in the HTML (rendered before A-Frame canvas)
 async function showCameraPicker(cancellable: boolean): Promise<void> {
+  const blocker = document.getElementById("cam-blocker")!;
+
+  // Request permission first so device labels are populated
   try {
     await navigator.mediaDevices.getUserMedia({ video: true });
   } catch {
-    alert("Camera permission denied.");
+    blocker.innerHTML =
+      '<p style="color:#ff6666">Camera permission denied.<br>Please allow camera access and reload.</p>';
     return;
   }
 
@@ -109,8 +114,9 @@ async function showCameraPicker(cancellable: boolean): Promise<void> {
     (d) => d.kind === "videoinput",
   );
 
-  const overlay = document.createElement("div");
-  overlay.id = "cam-picker";
+  // Reuse the blocker as the picker surface
+  blocker.innerHTML = "";
+  blocker.id = "cam-picker";
 
   const heading = document.createElement("h2");
   heading.textContent = "Select Camera";
@@ -143,14 +149,13 @@ async function showCameraPicker(cancellable: boolean): Promise<void> {
     const cancel = document.createElement("button");
     cancel.className = "btn-cancel";
     cancel.textContent = "Cancel";
-    cancel.addEventListener("click", () => overlay.remove());
+    cancel.addEventListener("click", () => blocker.remove());
     btnRow.appendChild(cancel);
   }
 
-  overlay.appendChild(heading);
-  overlay.appendChild(select);
-  overlay.appendChild(btnRow);
-  document.body.appendChild(overlay);
+  blocker.appendChild(heading);
+  blocker.appendChild(select);
+  blocker.appendChild(btnRow);
 }
 
 // --- HUD + controls ---
@@ -201,7 +206,9 @@ if (scene) {
   });
 }
 
-// Show picker on first load if no camera selected
+// Blocker is always visible from HTML — either fill it with picker or remove it
 if (!new URLSearchParams(location.search).get("cam")) {
   void showCameraPicker(false);
+} else {
+  document.getElementById("cam-blocker")?.remove();
 }
